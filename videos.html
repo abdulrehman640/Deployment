@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinity Random Viewer</title>
-    <style>
+    <title>Document</title>
+     <style>
         /* --- CSS (The Look) --- */
         body {
             height: 100vh;
             margin: 0;
             background: radial-gradient(circle at 50% 50%, #1b1ed6, #1c1f26 70%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe a', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column; /* Stack controls above media */
             align-items: center;
@@ -90,44 +90,22 @@
     </style>
 </head>
 <body>
-
-    <!-- --- HTML (The Structure) --- -->
-    
-    <div class="controls">
-        <!-- We use the original 'home' class you liked, but with specific IDs -->
-        <button class="home" id="btn-video"><strong>Random Video</strong></button>
-        <button class="home" id="btn-picture"><strong>Random Picture</strong></button>
-    </div>
-
-    <!-- This div is where JavaScript will place the random content -->
-    <div class="display-area" id="main-display">
+     <div class="display-area" id="main-display">
         <p class="placeholder-text">Click a button to start</p>
     </div>
-
-    <!-- --- JAVASCRIPT (The Logic) --- -->
+     <div class="controls">
+        <!-- We use the original 'home' class you liked, but with specific IDs -->
+        <button class="home" id="btn-video"><strong>Random Video</strong></button>
+    </div>
     <script>
-        /* 1. DATA (Our infinite libraries) */
-
-        // Array of YouTube Video IDs
-        const videos = [
+           const videos = [
             'NWZQkwXtHJo', // WebDev Tutorial
             'dQw4w9WgXcQ', // Rick Astley
             'kJQP7kiw5Fk', // Despacito
             'fJ9rUzIMcZQ', // Queen - Bohemian Rhapsody
-            '3JZ_D3ELwOQ'  // Lofi Beats
-        ];
-
-        // Array of Picture URLs (Using diverse examples)
-        const pictures = [
-            'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1470', // Coding on Laptop
-            'https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1470', // Cyberpunk City
-            'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1470', // Matrix Code
-            'https://images.unsplash.com/photo-1618788372246-79faff0c3182?q=80&w=1374', // Minimalist Abstract
-            'https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1470'  // Music Studio
-        ];
-
-        /* 2. CONFIGURATION */
-        const display = document.getElementById('main-display');
+            '3JZ_D3ELwOQ'
+    ]
+      const display = document.getElementById('main-display');
         let lastVideoIndex = -1;
         let lastPictureIndex = -1;
 
@@ -142,9 +120,7 @@
 
             return randomIndex;
         }
-
-        /* 4. Function: Display Random Video */
-        function showRandomVideo() {
+                function showRandomVideo() {
             const index = getUniqueRandomIndex(videos, lastVideoIndex);
             lastVideoIndex = index;
 
@@ -155,24 +131,7 @@
             // Step B: Overwrite the display area with the new iframe
             display.innerHTML = videoHtml;
         }
-
-        /* 5. Function: Display Random Picture */
-        function showRandomPicture() {
-            const index = getUniqueRandomIndex(pictures, lastPictureIndex);
-            lastPictureIndex = index;
-
-            // Step A: Generate the new img HTML string
-            // I use pictures[index] which gets the actual URL from the array
-            const pictureUrl = pictures[index];
-            const imgHtml = `<img src="${pictureUrl}" alt="Random display">`;
-
-            // Step B: Overwrite the display area with the new image
-            display.innerHTML = imgHtml;
-        }
-
-        /* 6. EVENT LISTENERS (Connecting actions to buttons) */
         document.getElementById('btn-video').addEventListener('click', showRandomVideo);
-        document.getElementById('btn-picture').addEventListener('click', showRandomPicture);
     </script>
 </body>
 </html>

@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinity Random Viewer</title>
+    <meta name="viewport" content="width= <div class="display-area" id="main-display">
+    <title>Document</title>
     <style>
         /* --- CSS (The Look) --- */
         body {
@@ -90,14 +90,49 @@
     </style>
 </head>
 <body>
-
-    <!-- --- HTML (The Structure) --- -->
-    
-    <div class="controls">
-        <button class="home" id="btn-video" onclick="location.href='videos.html'"><strong>Random Video</strong></button>
-        <button class="home" id="btn-picture" onclick="location.href='picture.html'"><strong>Random Picture</strong></button>
+     <div class="display-area" id="main-display">
+        <p class="placeholder-text">Click a button to start</p>
     </div>
+     <div class="controls">
+        <!-- We use the original 'home' class you liked, but with specific IDs -->
+        <button class="home" id="btn-picture"><strong>Random Picture</strong></button>
+    </div>
+    <script>
+         const pictures = [
+            'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1470', // Coding on Laptop
+            'https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1470', // Cyberpunk City
+            'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1470', // Matrix Code
+            'https://images.unsplash.com/photo-1618788372246-79faff0c3182?q=80&w=1374', // Minimalist Abstract
+            'https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1470'  // Music Studio
+        ];
+        const display = document.getElementById('main-display');
+        let lastVideoIndex = -1;
+        let lastPictureIndex = -1;
 
-    <!-- This div is where JavaScript will place the random content -->
-  </body>
-  </html>
+        /* 3. Helper Function: Get a unique random index (prevents repeats) */
+        function getUniqueRandomIndex(array, lastIndex) {
+            let randomIndex;
+            
+            // Loop prevents picking the exact same item twice in a row
+            do {
+                randomIndex = Math.floor(Math.random() * array.length);
+            } while (randomIndex === lastIndex && array.length > 1);
+
+            return randomIndex;
+        }
+               function showRandomPicture() {
+            const index = getUniqueRandomIndex(pictures, lastPictureIndex);
+            lastPictureIndex = index;
+
+            // Step A: Generate the new img HTML string
+            // I use pictures[index] which gets the actual URL from the array
+            const pictureUrl = pictures[index];
+            const imgHtml = `<img src="${pictureUrl}" alt="Random display">`;
+
+            // Step B: Overwrite the display area with the new image
+            display.innerHTML = imgHtml;
+        }
+        document.getElementById('btn-picture').addEventListener('click', showRandomPicture);
+    </script>
+</body>
+</html>
